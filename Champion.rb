@@ -1,8 +1,7 @@
-class Champion
-    attr_accessor :hp, :str, :int, :lck, :dxt
+class Champion < Entity
+    attr_accessor :dxt
     @max_pv = 100
     @max_bag_place = 5
-    @crit = false
     
     def initialize (hp,str,int,lck,dxt)
       if (hp < 45)
@@ -33,14 +32,14 @@ class Champion
         if (crit)
           puts "CRITICAL HIT !!!"
           crit = false
-          return str*1.5  #Ajouter les bonus d'équipement
+          return str*1.5  #Ajouter les bonus d'equipement
         else
           return str      #idem
         end
       end
       
       def hit(damage)
-        self.hp -= damage
+        self.hp -= damage #Calcul des bonus 
       end
     
     def to_s
