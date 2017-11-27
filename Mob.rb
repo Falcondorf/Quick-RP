@@ -3,42 +3,42 @@ require "Entity.rb"
 
 #Key is name of the mob and values an array describing base hp, str and lck
 $list_forest_mobs_attr = [
-   ["Wolf",15,3,0,5],
-   ["Boar",17,4,0,0],
-   ["Bear",22,12,0,0],
-   ["Flesh eating plant",10,5,4,2],
-   ["Forest bandit",18,18,1,3],
-   ["Cursed Treant",32,12,15,0],
-   ["Giant termite",13,7,0,0],
-   ["Rabid rodent",15,8,0,0],
-   ["Fierce Raven",13,6,4,1],
-   ["Evil Fairy",8,8,30,100]
+   ["Wolf",30,6,0,18],
+   ["Boar",34,8,0,0],
+   ["Bear",44,20,0,0],
+   ["Flesh eating plant",20,15,4,10],
+   ["Forest bandit",36,18,1,15],
+   ["Cursed Treant",54,24,15,0],
+   ["Giant termite",26,14,0,0],
+   ["Rabid rodent",30,16,0,0],
+   ["Fierce Raven",26,12,4,20],
+   ["Evil Fairy",16,8,30,100]
 ]
 
 $list_cave_mobs_attr = [
-  ["Bat"],
-  ["Sly Goblin"],
-  ["Spider"],
-  ["Stone Elemental"],
-  ["Slime"],
-  ["Minor"],
-  ["Cave Bear"],
-  ["Drooling Troll"],
-  ["Shrooman"],
-  ["Wicked Fairy"]
+  ["Bat",20,8,0,20],
+  ["Sly Goblin",28,13,7,13],
+  ["Spider",18,10,0,10],
+  ["Stone Elemental",60,28,0,1],
+  ["Slime",80,1,0,25],
+  ["Miner",36,17,5,20],
+  ["Cave Bear",30,22,0,0],
+  ["Drooling Troll",40,27,0,0],
+  ["Shrooman",30,15,5,10],
+  ["Wicked Fairy",17,9,30,100]
 ]
 
 $list_dungeon_mobs_attr = [
-  ["Dusty Skeleton"],
-  ["Elegant Vampire"],
-  ["Golem"],
-  ["Stinky Undead"],
-  ["Living Armor"],
-  ["Sad Ghost"],
-  ["Fake-Chest"],
-  ["Automaton"],
-  ["Gargoyle"],
-  ["Bewitching Medusa"]
+  ["Dusty Skeleton",20,13,0,40],
+  ["Elegant Vampire",38,18,58,20],
+  ["Golem",75,35,0,1],
+  ["Stinky Undead",22,17,0,5],
+  ["Living Armor",30,30,30,5],
+  ["Sad Ghost",1,1,70,0],
+  ["Fake-Chest",20,25,0,15],
+  ["Automaton",18,17,30,35],
+  ["Gargoyle",30,30,30,5],
+  ["Bewitching Medusa",20,12,38,10]
 ]
 
 $list_city_mobs_attr = [
@@ -62,7 +62,7 @@ class Mob < Entity
   attr_accessor :name
   
     def initialize (location)
-      rand_spawn = rand(11)
+      rand_spawn = rand(10)
       case (location)
       when "Forest"
         self.name=($list_forest_mobs_attr[rand_spawn][0])
@@ -98,6 +98,6 @@ class Mob < Entity
     end
 end
 
-mtest = Mob.new("Forest")
+mtest = Mob.new("Dungeon")
 puts mtest
 puts "#{mtest.fight()} damage(s)"

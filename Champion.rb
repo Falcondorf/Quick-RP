@@ -1,3 +1,5 @@
+require "Entity.rb"
+
 class Champion < Entity
     attr_accessor :dxt
     @max_pv = 100
@@ -8,12 +10,12 @@ class Champion < Entity
         hp += 35
       end
       
-      if(str+int+lck+dxt < 40)
+      if(str+int+lck+dxt < 20)
         str += 5
         int += 5
         lck += 2
         dxt += 3
-      elsif (str+int+lck+dxt > 55)
+      elsif (str+int+lck+dxt > 30)
         str -= 5
         int -= 5
         lck -= 2
@@ -47,5 +49,5 @@ class Champion < Entity
     end
 end
 
-ptest = Champion.new(1+rand(100), 1+rand(25), 1+rand(25), 1+rand(5), 1+rand(10))
+ptest = Champion.new(1+rand(100), 1+rand(10), 1+rand(10), 1+rand(25), 1+rand(10))
 puts ptest
