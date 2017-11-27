@@ -15,15 +15,42 @@ $list_forest_mobs_attr = [
 ]
 
 $list_cave_mobs_attr = [
-
+  ["Bat"],
+  ["Sly Goblin"],
+  ["Spider"],
+  ["Stone Elemental"],
+  ["Slime"],
+  ["Minor"],
+  ["Cave Bear"],
+  ["Drooling Troll"],
+  ["Shrooman"],
+  ["Wicked Fairy"]
 ]
 
 $list_dungeon_mobs_attr = [
-
+  ["Dusty Skeleton"],
+  ["Elegant Vampire"],
+  ["Golem"],
+  ["Stinky Undead"],
+  ["Living Armor"],
+  ["Sad Ghost"],
+  ["Fake-Chest"],
+  ["Automaton"],
+  ["Gargoyle"],
+  ["Bewitching Medusa"]
 ]
 
 $list_city_mobs_attr = [
-
+  ["Thief"],
+  ["Harlequin"],
+  ["Corrupted Guard"],
+  ["Stray Dog"],
+  ["Giant Sewer Rat"],
+  ["Drunken"],
+  ["Assassin"],
+  ["Giant Slug"],
+  ["Crazy Chemist"],
+  ["Failed Experiment"]
 ]
 
 $list_Bosses_attr = [
