@@ -24,11 +24,12 @@ class Champion < Entity
       
         self.max_pv = 100
         self.max_bag_place = 5
-        
+=begin
+Let's try to implement the equipement with a Hash 
         self.gears = {
           "Head" => Gear.new()
         }
-        
+=end
         self.hp = hp
         self.str = str
         self.int = int
