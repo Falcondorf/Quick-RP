@@ -25,8 +25,12 @@ $list_boots = [
 
 class Gear
   attr_accessor :name, :place, :rarity, :hp, :str, :int, :lck, :dxt
-  
-  def initialize ()
+=begin
+
+  def initialize (name, place, rarity, hp, str, int, lck, dxt)
+    self.name = "[#{rarity}]#{name}"
+    self.place = place
     
   end
+=end
 end

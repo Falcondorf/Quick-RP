@@ -1,9 +1,9 @@
 require "Entity.rb"
+require "Gear.rb"
 
 class Champion < Entity
-    attr_accessor :dxt
-    @max_pv = 100
-    @max_bag_place = 5
+    attr_accessor :max_hp, :max_bag_place, :dxt, :gears, :bag
+    
     
     def initialize (hp,str,int,lck,dxt)
       if (hp < 45)
@@ -22,6 +22,13 @@ class Champion < Entity
         dxt -= 3
       end
       
+        self.max_pv = 100
+        self.max_bag_place = 5
+        
+        self.gears = {
+          "Head" => Gear.new()
+        }
+        
         self.hp = hp
         self.str = str
         self.int = int
