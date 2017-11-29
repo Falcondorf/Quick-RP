@@ -1,5 +1,3 @@
-require "Formulas.rb"
-
 class Entity
   attr_accessor :hp, :str, :int, :lck
   @crit = false
@@ -17,6 +15,12 @@ class Entity
       
    def hit (damage)
      self.hp -= damge
+   end
+   
+   private 
+   def calc_crit(lck)
+    roll = rand(100)+1
+    return (roll < lck)
    end
   
 end

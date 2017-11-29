@@ -1,4 +1,3 @@
-require "Formulas.rb"
 require "Entity.rb"
 
 #Key is name of the mob and values an array describing base hp, str and lck
