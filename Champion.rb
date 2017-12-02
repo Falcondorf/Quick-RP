@@ -22,7 +22,9 @@ class Champion < Entity
         dxt -= 3
       end
       
-        self.max_pv = 100
+      str, int, lck, dxt = check_stats(str, int, lck, dxt)
+      
+        self.max_hp = 100
         self.max_bag_place = 5
 
         self.gears = {
@@ -41,25 +43,71 @@ class Champion < Entity
         self.dxt = dxt
     end
     
-  def fight
+  def fight()
+        power = str + calc_bonus("str")
         crit = calc_crit(self.lck)
         if (crit)
-          puts "CRITICAL HIT !!!"
+          puts "CRITICAL HIT !!!\n#{power*2} damage dealt..."
           crit = false
-          return str*1.5  #Ajouter les bonus d'equipement
+          return power*2
         else
-          return str      #idem
+          puts "#{power} damage dealt..."
+          return power
         end
       end
       
       def hit(damage)
-        self.hp -= damage #Calcul des bonus 
+        dodge = calc_escape(self.dxt)
+        if(dodge)
+          puts "Dodged"
+          damage = 0
+        end
+        puts "You took #{damage} damage(s)."
+        self.hp -= damage        
       end
     
     def to_s
-        "Your champion has actually #{self.hp} HP left.\nStats:\nStrenght:#{self.str} -- Intelligence:#{self.int} -- Luck:#{self.lck} -- Dexterity:#{self.dxt}"
+        "Your champion has actually #{self.hp}/#{self.max_hp}(+#{calc_bonus("hp")}).\nStats:\nStrenght:#{self.str}(+#{calc_bonus("str")}) -- Intelligence:#{self.int}(+#{calc_bonus("int")}) -- Luck:#{self.lck}(+#{calc_bonus("lck")}) -- Dexterity:#{self.dxt}(+#{calc_bonus("dxt")})"
     end
+    
+    private
+    
+  def check_stats (str, int, lck, dxt)
+          if (str <= 0)
+            str = 1
+          end
+          if (int <= 0)
+            int = 1
+          end
+          if (lck <= 0)
+            lck = 1
+          end
+          if (dxt <= 0)
+            dxt = 1
+          end
+          return str, int, lck, dxt
+        end
+      
+  def calc_bonus(stat)
+          bonus = 0
+          self.gears.each do |place, gear| 
+            case (stat)
+            when "hp"
+              bonus += gear.hp
+            when "str"
+              bonus += gear.str
+            when "int"
+              bonus += gear.int
+            when "lck"
+              bonus += gear.lck
+            when "dxt"
+              bonus += gear.dxt
+            end
+          end
+          return bonus
+        end
 end
 
-ptest = Champion.new(1+rand(100), 1+rand(10), 1+rand(10), 1+rand(25), 1+rand(10))
+ptest = Champion.new(rand(1..100), rand(1..10), rand(1..10), rand(1..25), rand(1..10))
 puts ptest
+puts "Test dealing damage :: #{ptest.fight()}"

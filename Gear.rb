@@ -47,6 +47,7 @@ class Gear
       self.name = "Trouser"
     when "Foot"
       self.name = "Socks"
+      self.dxt = 1
     when "Weapon"
       self.name = "Stick"
       self.str = 2
@@ -56,11 +57,12 @@ class Gear
     
     self.place = emplacement 
   end
+=begin
   
   def initialize (rarity, roll) #Create a Random equipement
     
   end
-  
+=end
   def to_s
     "#{self.rarity}#{self.name}\n-------------------\nHP:#{self.hp}\nStr:#{self.str}\nInt:#{self.int}\nLck:#{self.lck}\nDxt:#{self.dxt}"
   end

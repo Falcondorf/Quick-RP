@@ -19,8 +19,13 @@ class Entity
    
    private 
    def calc_crit(lck)
-    roll = rand(100)+1
+    roll = rand(1..100)
     return (roll < lck)
+   end
+   
+   def calc_escape(dxt)
+     roll = rand(1..100)
+     return (roll < dxt)
    end
   
 end
