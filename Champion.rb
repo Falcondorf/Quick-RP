@@ -27,6 +27,8 @@ class Champion < Entity
         self.max_hp = 100
         self.max_bag_place = 5
 
+        self.bag = []
+                
         self.gears = {
           "Head" => Gear.new("Head"),
           "Chest" => Gear.new("Chest"),
