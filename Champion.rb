@@ -1,8 +1,9 @@
 require "Entity.rb"
 require "Gear.rb"
+require "Item.rb"
 
 class Champion < Entity
-    attr_accessor :max_hp, :max_bag_place, :dxt, :gears, :bag
+    attr_accessor :max_hp, :max_bag_place, :gears, :bag
     
     
     def initialize (hp,str,int,lck,dxt)
@@ -27,7 +28,11 @@ class Champion < Entity
         self.max_hp = 100
         self.max_bag_place = 5
 
-        self.bag = []
+        self.bag = [
+          Item.new("Starting Potion","Basic","potion"),
+          Item.new("Starting Potion","Basic","potion"),
+          Item.new("Starting Potion","Basic","potion")
+          ]
                 
         self.gears = {
           "Head" => Gear.new("Head"),
@@ -59,14 +64,33 @@ class Champion < Entity
       end
       
       def hit(damage)
-        dodge = calc_escape(self.dxt)
+        dodge = calc_escape(self.dxt+calc_bonus("dxt"))
         if(dodge)
           puts "Dodged"
           damage = 0
         end
         puts "You took #{damage} damage(s)."
-        self.hp -= damage        
+        self.hp -= damage 
+        return
       end
+      
+  def use_item (id)
+    item_rarity = self.bag[id].rarity()
+    item_type = self.bag[id].type()
+    
+      case(item_type)
+      when "potion"   #restore health (rarity determine how many health given back)
+        
+      when "elixir"   #increase stats definitly(rarity determines how many stats)
+        
+      when "bag-slot" #increase place in bag(rarity determines amount of slots)
+        
+      when "poison"   #deal damage to a mob(rarity determines how many damages)
+            
+      end
+      
+      puts "You used #{self.bag[id]}"
+    end
     
     def to_s
         "Your champion has actually #{self.hp}/#{self.max_hp}(+#{calc_bonus("hp")}).\nStats:\nStrenght:#{self.str}(+#{calc_bonus("str")}) -- Intelligence:#{self.int}(+#{calc_bonus("int")}) -- Luck:#{self.lck}(+#{calc_bonus("lck")}) -- Dexterity:#{self.dxt}(+#{calc_bonus("dxt")})"
@@ -112,4 +136,9 @@ end
 
 ptest = Champion.new(rand(1..100), rand(1..10), rand(1..10), rand(1..25), rand(1..10))
 puts ptest
-puts "Test dealing damage :: #{ptest.fight()}"
+print "Test dealing damage :: "
+ptest.fight()
+print "Test taking damage :: "
+ptest.hit(10)
+
+ptest.use_item(0)
