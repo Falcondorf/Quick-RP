@@ -71,48 +71,72 @@ class Champion < Entity
         end
         puts "You took #{damage} damage(s)."
         self.hp -= damage 
-        return
       end
       
   def use_item (id)
     item_rarity = self.bag[id].rarity()
     item_type = self.bag[id].type()
+    rar_mult = calc_rarity_mult(item_rarity)
     
+    puts "You are using #{self.bag[id]}"
       case(item_type)
       when "potion"   #restore health (rarity determine how many health given back)
-        
+        if (self.hp == self.max_hp+calc_bonus("hp"))
+          puts "Your hp are already full..."
+        else
+          self.hp = 10 * rar_mult
+          puts "You healed #{10*rar_mult} hp."
+          check_hp_overextend()
+        end        
       when "elixir"   #increase stats definitly(rarity determines how many stats)
-        
+        #TODO
       when "bag-slot" #increase place in bag(rarity determines amount of slots)
-        
+        self.max_bag_place += rar_mult
+        puts "You can now carry #{rar_mult} more slots."
       when "poison"   #deal damage to a mob(rarity determines how many damages)
-            
+        #TODO
       end
-      
-      puts "You used #{self.bag[id]}"
     end
     
     def to_s
         "Your champion has actually #{self.hp}/#{self.max_hp}(+#{calc_bonus("hp")}).\nStats:\nStrenght:#{self.str}(+#{calc_bonus("str")}) -- Intelligence:#{self.int}(+#{calc_bonus("int")}) -- Luck:#{self.lck}(+#{calc_bonus("lck")}) -- Dexterity:#{self.dxt}(+#{calc_bonus("dxt")})"
     end
     
-    private
+private
     
-  def check_stats (str, int, lck, dxt)
-          if (str <= 0)
-            str = 1
-          end
-          if (int <= 0)
-            int = 1
-          end
-          if (lck <= 0)
-            lck = 1
-          end
-          if (dxt <= 0)
-            dxt = 1
-          end
-          return str, int, lck, dxt
-        end
+    def check_hp_overextend
+      if(self.hp > self.max_hp+calc_bonus("hp"))
+        self.hp = self.max_hp+calc_bonus("hp")
+        puts "HP maxed."
+      end
+    end
+    
+    def calc_rarity_mult(rar)
+      case (rar)
+      when "Basic"
+        return 1
+      when "Rare"
+        return 5
+      when "Epic"
+        return 10
+      end
+    end
+    
+    def check_stats (str, int, lck, dxt)
+      if (str <= 0)
+        str = 1
+      end
+      if (int <= 0)
+        int = 1
+      end
+      if (lck <= 0)
+        lck = 1
+      end
+      if (dxt <= 0)
+        dxt = 1
+      end
+      return str, int, lck, dxt
+     end
       
   def calc_bonus(stat)
           bonus = 0
