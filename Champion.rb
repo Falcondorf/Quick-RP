@@ -88,8 +88,8 @@ class Champion < Entity
           puts "You healed #{10*rar_mult} hp."
           check_hp_overextend()
         end        
-      when "elixir"   #increase stats definitly(rarity determines how many stats)
-        #TODO
+      when "elixir"   #increase stats definitly(rarity determines how many stats) 
+        increase_stat(self.bag[id].name().slice(0..2), rar_mult)
       when "bag-slot" #increase place in bag(rarity determines amount of slots)
         self.max_bag_place += rar_mult
         puts "You can now carry #{rar_mult} more slots."
@@ -104,6 +104,24 @@ class Champion < Entity
     
 private
     
+    def increase_stat(stat, add)      
+      case(stat)
+        when "str"
+          self.str += add
+        when "int"
+          self.int += add
+        when "lck"
+          self.lck += add
+        when "dxt"
+          self.dxt += add
+        when "hps"
+          self.max_hp += add
+      else
+        raise "Wrong string"
+      end
+      puts "You increased your #{stat}."
+    end
+
     def check_hp_overextend
       if(self.hp > self.max_hp+calc_bonus("hp"))
         self.hp = self.max_hp+calc_bonus("hp")
@@ -165,4 +183,5 @@ ptest.fight()
 print "Test taking damage :: "
 ptest.hit(10)
 
-ptest.use_item(0)
+ptest.use_item(2)
+puts ptest
