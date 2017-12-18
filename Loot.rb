@@ -8,9 +8,12 @@ class Loot
     gear = Gear.new()
   end
   
+  private
+  
   def reward_bonus(nodamage)
     if (nodamage)
       self.gold *= 2
     end
   end
+  
 end

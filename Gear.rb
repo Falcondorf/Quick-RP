@@ -1,6 +1,12 @@
 $list_weapons = [
-  ["Sword",0,5,0,0,3], #name - str - int - lck - dxt // These represents base bonus stats
-  []
+  ["Sword",0,5,0,1,3], #name - hp - str - int - lck - dxt // These represents base bonus stats
+  ["Axe",0,7,0,2,1],
+  ["Dagger",0,3,0,8,8],
+  ["Hammer",0,10,0,0,0],
+  ["Wand",0,0,15,0,4],
+  ["Staff",0,4,10,0,0],
+  ["Bow",0,8,0,3,0],
+  ["Shield",5,2,0,0,0]
 ]
 
 $list_helmets = [

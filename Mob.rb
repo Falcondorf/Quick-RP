@@ -101,6 +101,8 @@ class Mob < Entity
     end
 end
 
+=begin
 mtest = Mob.new("Dungeon")
 puts mtest
 puts "#{mtest.fight()} damage(s)"
+=end

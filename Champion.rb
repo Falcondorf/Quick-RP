@@ -3,7 +3,7 @@ require "Gear.rb"
 require "Item.rb"
 
 class Champion < Entity
-    attr_accessor :max_hp, :max_bag_place, :gears, :bag
+    attr_accessor :max_hp, :max_bag_place, :gears, :bag, :money
     
     
     def initialize (hp,str,int,lck,dxt)
@@ -48,6 +48,7 @@ class Champion < Entity
         self.int = int
         self.lck = lck
         self.dxt = dxt
+        self.money = 5
     end
     
   def fight()
