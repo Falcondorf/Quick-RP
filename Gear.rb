@@ -1,3 +1,5 @@
+
+#The lists must not have more than 10 items /!\
 $list_weapons = [
   ["Sword",0,5,0,1,3], #name - hp - str - int - lck - dxt // These represents base bonus stats
   ["Axe",0,7,0,2,1],
@@ -10,19 +12,35 @@ $list_weapons = [
 ]
 
 $list_helmets = [
-  ["Cool glasses",0,0,0,0,0],
+  ["Cool glasses",0,0,1,0,0],
   ["Leather helmet",3,0,0,0,4],
   ["Iron helmet",5,0,0,0,0],
   ["Cap",0,0,5,0,0],
-  ["Golden diadem",0,0,0,10,0]
+  ["Golden diadem",0,0,0,10,0],
+  ["Leprechaun cap",0,0,2,8,4],
+  ["Iron band",2,4,0,0,3],
+  ["Skull",1,5,0,0,0],
+  ["Hermes helmet",0,0,4,1,15]
 ]
 
 $list_armor = [
-  
+  ["Leather chestplate",2,0,0,0,5],
+  ["Iron chestplate",4,1,0,0,0],
+  ["Runic tunic",0,0,10,1,0],
+  ["Weighless shirt",0,0,3,1,12],
+  ["Golden chestplate",2,1,1,15,0],
+  ["Diamond chestplate",10,2,0,3,0],
+  ["Bone chestplate",1,7,3,0,3]
 ]
 
 $list_gloves = [
-  
+  ["Claws",0,9,0,1,3],
+  ["Leather gloves",2,0,0,0,2],
+  ["Iron gauntlet",4,3,0,0,0],
+  ["Ring with runes and ruby",0,0,5,3,3],
+  ["Golden bracelet",0,0,10,2,2],
+  ["Force glove",3,7,0,0,1],
+  ["Copper Bracelet",3,3,0,0,0]
 ]
 
 $list_pants = [
@@ -87,6 +105,10 @@ class Gear
     
     if (emp == 1 || emp == 7)
       #head
+      if (i >= $list_helmets.length) 
+        i = i % $list_helmets.length
+      end
+      
       self.place = "Head"
       self.name = $list_helmets[i][0]
       self.hp = $list_helmets[i][1]*mult
@@ -96,6 +118,10 @@ class Gear
       self.dxt = $list_helmets[i][5]*mult
     elsif(emp == 2 || emp == 8)
       #armor
+      if (i >= $list_armor.length) 
+        i = i % $list_armor.length
+      end
+      
       self.place = "Chest"
       self.name = $list_armor[i][0]
       self.hp = $list_armor[i][1]*mult
@@ -105,6 +131,10 @@ class Gear
       self.dxt = $list_armor[i][5]*mult
     elsif(emp == 3 || emp == 9)
       #weapon
+      if (i >= $list_weapons.length) 
+        i = i % $list_weapons.length
+      end
+      
       self.place = "Weapon"
       self.name = $list_weapons[i][0]
       self.hp = $list_weapons[i][1]*mult
@@ -114,6 +144,10 @@ class Gear
       self.dxt = $list_weapons[i][5]*mult
     elsif(emp == 4 || emp == 10)
       #pants
+      if (i >= $list_pants.length) 
+        i = i % $list_pants.length
+      end
+      
       self.place = "Legs"
       self.name = $list_pants[i][0]
       self.hp = $list_pants[i][1]*mult
@@ -123,6 +157,10 @@ class Gear
       self.dxt = $list_pants[i][5]*mult
     elsif(emp == 5)
       #gloves
+      if (i >= $list_gloves.length) 
+        i = i % $list_gloves.length
+      end
+      
       self.place = "Hands"
       self.name = $list_gloves[i][0]
       self.hp = $list_gloves[i][1]*mult
@@ -132,6 +170,10 @@ class Gear
       self.dxt = $list_gloves[i][5]*mult
     elsif(emp == 6)
       #boots
+      if (i >= $list_boots.length) 
+        i = i % $list_boots.length
+      end
+      
       self.place = "Foot"
       self.name = $list_boots[i][0]
       self.hp = $list_boots[i][1]*mult
@@ -143,7 +185,7 @@ class Gear
       raise "Roll calculation error; must be between 1 and 10."
     end
     
-    self.value = 0 #TODO
+    self.value = 5*mult
     
   end
 
@@ -156,7 +198,7 @@ end
 
 #Demo test with exception handling
 begin
-  gtest = Gear.new("Head") #put in singular form
+  gtest = Gear.new("Rare",15) #put in singular form
   puts gtest
 rescue Exception=>e
   puts "Error : #{e}"

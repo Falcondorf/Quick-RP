@@ -37,7 +37,7 @@ $list_dungeon_mobs_attr = [
   ["Fake-Chest",20,25,0,15,5],
   ["Automaton",18,17,30,35,5],
   ["Gargoyle",30,30,30,5,2],
-  ["Bewitching Medusa",20,12,38,10,10]
+  ["Bewitching Gorgon",20,12,38,10,10]
 ]
 
 $list_city_mobs_attr = [
