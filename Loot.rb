@@ -8,8 +8,7 @@ class Loot
     self.gold = rand(1..7)
     reward_bonus(nodamage)
     rarity = roll_rarity
-    #gear = Gear.new(rarity,rand(1..100))
-    #Why is it not taking the instance ?
+    self.gear = Gear.new(rarity,rand(1..100))
   end
   
   def to_s
@@ -63,6 +62,8 @@ class Loot
   
 end
 
-tloot = Loot.new(1,false)
+=begin
+tloot = Loot.new(2,true)
 
 puts tloot
+=end

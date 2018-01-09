@@ -94,7 +94,7 @@ class Champion < Entity
       when "bag-slot" #increase place in bag(rarity determines amount of slots)
         self.max_bag_place += rar_mult
         puts "You can now carry #{rar_mult} more slots."
-      when "poison"   #deal damage to a mob(rarity determines how many damages)
+      when "poison"   #deal damage to a mob(rarity determines how many damages) //may be like a grenade
         #TODO
       end
     end
