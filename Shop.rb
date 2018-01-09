@@ -8,13 +8,27 @@ class Shop
   def initialize(level) #The level determines the rarity of its goods
     self.level = level
     self.items  = Array.new
+    self.gears = Array.new
     for i in (0..3)
       item_vals = roll_items
       items.push(Item.new(item_vals[0],item_vals[1],item_vals[2]))
     end
     for k in (0..2)
-      #gears.push(Gear.new())
+      gears.push(Gear.new(roll_rarity(),rand(1..100)))
     end
+  end
+  
+def to_s
+    disp = "Selling followings items:\nItem:\n"
+    for i in (0..items.length-1)
+      disp += "*#{items[i]}\n"
+    end
+    disp += "---------------\nGears:\n"
+    for i in (0..gears.length-1)
+      disp += "*#{gears[i]}\n"
+    end
+    
+    return disp
   end
   
   private
@@ -107,8 +121,8 @@ class Shop
   end
 end
 
-=begin
+
 shtest = Shop.new(4)
 
-puts shtest.items[0]
-=end
+puts shtest
+

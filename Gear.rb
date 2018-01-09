@@ -1,5 +1,5 @@
 
-#The lists must not have more than 10 items /!\
+#The lists must not have more than 10 items or they will never be accessed /!\
 $list_weapons = [
   ["Sword",0,5,0,1,3], #name - hp - str - int - lck - dxt // These represents base bonus stats
   ["Axe",0,7,0,2,1],
@@ -44,11 +44,24 @@ $list_gloves = [
 ]
 
 $list_pants = [
-  
+  ["Leather pants",3,0,0,0,1],
+  ["Bone pants",1,5,3,0,4],
+  ["Iron legplate",4,3,0,0,0],
+  ["Weighless pants",0,0,4,0,10],
+  ["Witch skirt",0,0,12,0,0],
+  ["Golden legplate",2,1,1,15,0],
+  ["Dragon's scale pants",10,5,1,3,1],
+  ["Diamond legplate",10,1,0,4,0]
 ]
 
 $list_boots = [
-  
+  ["Hermes sandals",0,0,4,1,11],
+  ["Leather shoes",2,0,0,0,2],
+  ["Iron boots",5,1,0,0,0],
+  ["Magic sandals",0,0,8,2,0],
+  ["Golden shoes",1,0,0,10,1],
+  ["Obsidian boots",12,1,0,0,0],
+  ["Boots with spikes",2,9,0,0,0]
 ]
 
 class Gear
@@ -56,7 +69,7 @@ class Gear
 
   def initialize (emplacement) #Create default starting equipement
     
-    self.rarity = "[Basic]"
+    self.rarity = "Basic"
     self.hp = 0
     self.str = 0
     self.int = 0
@@ -88,10 +101,10 @@ class Gear
   end
   
   def initialize (rarity, roll) #Create a Random equipement DIV = emplacement - MOD = number in DB
+    
     emp = roll/10
     i = roll%10
-    self.rarity = "[#{rarity}]"
-    
+    self.rarity = rarity
     case(rarity)
     when "Basic"
       mult = 1
@@ -155,7 +168,7 @@ class Gear
       self.int = $list_pants[i][3]*mult
       self.lck = $list_pants[i][4]*mult
       self.dxt = $list_pants[i][5]*mult
-    elsif(emp == 5)
+    elsif(emp == 0 || emp == 5)
       #gloves
       if (i >= $list_gloves.length) 
         i = i % $list_gloves.length
@@ -186,20 +199,19 @@ class Gear
     end
     
     self.value = 5*mult
-    
   end
 
   def to_s
-    "#{self.rarity}#{self.name}\n-------------------\nHP:#{self.hp}\nStr:#{self.str}\nInt:#{self.int}\nLck:#{self.lck}\nDxt:#{self.dxt}\n-------------------\nWorth #{self.value} gold(s)"
-  end
+    "[#{self.rarity}]#{self.name}\n-------------------\nHP:#{self.hp}\nStr:#{self.str}\nInt:#{self.int}\nLck:#{self.lck}\nDxt:#{self.dxt}\n-------------------\nWorth #{self.value} gold(s)"  end
 
 end
 
-
+=begin
 #Demo test with exception handling
 begin
-  gtest = Gear.new("Rare",15) #put in singular form
+  gtest = Gear.new("Basic",rand(1..100))
   puts gtest
 rescue Exception=>e
   puts "Error : #{e}"
 end
+=end
