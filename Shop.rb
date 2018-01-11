@@ -57,7 +57,7 @@ def to_s
   
   def roll_rarity
     roll = rand(100)
-    if (self.level == 1)
+    if (self.level == "Forest")
       if (roll < 80)
         "Basic"
       elsif (roll < 95)
@@ -65,7 +65,7 @@ def to_s
       else
         "Epic"
       end
-    elsif (self.level == 2)
+    elsif (self.level == "Cave")
       if (roll < 65)
         "Basic"
       elsif (roll < 85)
@@ -73,7 +73,7 @@ def to_s
       else
         "Epic"
       end
-    elsif (self.level == 3)
+    elsif (self.level == "Dungeon")
       if (roll < 50)
         "Basic"
       elsif (roll < 90)
@@ -81,7 +81,7 @@ def to_s
       else
         "Epic"
       end
-    elsif (self.level == 4)
+    elsif (self.level == "City")
       if (roll < 35)
         "Basic"
       elsif (roll < 60)
@@ -121,8 +121,8 @@ def to_s
   end
 end
 
-
-shtest = Shop.new(4)
+=begin
+shtest = Shop.new("Forest")
 
 puts shtest
-
+=end

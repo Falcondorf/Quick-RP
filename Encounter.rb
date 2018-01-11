@@ -7,10 +7,12 @@ class Encounter
   def initialize (location)
     self.location = location
     self.mob= Mob.new(location)
-    self.loot = Loot.new()
     self.nodamage = true
   end
   
+  def to_s
+    "You are in #{self.location} against a #{self.mob.name}"
+  end
   
 end
 

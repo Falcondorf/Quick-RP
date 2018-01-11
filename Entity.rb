@@ -1,5 +1,6 @@
 class Entity
   attr_accessor :hp, :str, :int, :lck, :dxt
+  attr_reader :is_dead
   @crit = false
   
   def fight
@@ -22,6 +23,12 @@ class Entity
      puts "You took #{damage} damage(s)."
      self.hp -= damage 
      return
+   end
+   
+   def die ()
+     if (hp <=0 )
+       isdead = true
+     end
    end
    
    private 

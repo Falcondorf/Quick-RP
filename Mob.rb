@@ -54,13 +54,23 @@ $list_city_mobs_attr = [
 ]
 
 $list_Bosses_attr = [
-  
+  ["Placeholder",0,0,0,0,0],
+  ["Placeholder",0,0,0,0,0],
+  ["Placeholder",0,0,0,0,0],
+  ["Placeholder",0,0,0,0,0],
+  ["Placeholder",0,0,0,0,0],
+  ["Placeholder",0,0,0,0,0],
+  ["Placeholder",0,0,0,0,0],
+  ["Placeholder",0,0,0,0,0],
+  ["Placeholder",0,0,0,0,0],
+  ["Placeholder",0,0,0,0,0]
 ]
 
 class Mob < Entity    
   attr_accessor :name
   
     def initialize (location)
+      is_dead = false
       rand_spawn = rand(10)
       case (location)
       when "Forest"
@@ -91,6 +101,20 @@ class Mob < Entity
         self.int=($list_city_mobs_attr[rand_spawn][3])
         self.lck=($list_city_mobs_attr[rand_spawn][4])
         self.dxt=($list_city_mobs_attr[rand_spawn][5])
+      when "Boss"
+        self.name=($list_Bosses_attr[rand_spawn][0])
+        self.hp=($list_Bosses_attr[rand_spawn][1])
+        self.str=($list_Bosses_attr[rand_spawn][2])
+        self.int=($list_Bosses_attr[rand_spawn][3])
+        self.lck=($list_Bosses_attr[rand_spawn][4])
+        self.dxt=($list_Bosses_attr[rand_spawn][5])
+      when "Final Boss"
+        self.name="Hastzora"
+        self.hp=12000
+        self.str=80
+        self.int=50
+        self.lck=40
+        self.dxt=45
       else 
         raise "Unknown location"
       end

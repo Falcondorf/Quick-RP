@@ -7,6 +7,8 @@ class Champion < Entity
     
     
     def initialize (hp,str,int,lck,dxt)
+      is_dead = false
+      
       if (hp < 45)
         hp += 35
       end
@@ -85,7 +87,7 @@ class Champion < Entity
         if (self.hp == self.max_hp+calc_bonus("hp"))
           puts "Your hp are already full..."
         else
-          self.hp = 10 * rar_mult
+          self.hp += 10 * rar_mult
           puts "You healed #{10*rar_mult} hp."
           check_hp_overextend()
         end        
@@ -176,13 +178,15 @@ private
           return bonus
         end
 end
+=begin 
 
 ptest = Champion.new(rand(1..100), rand(1..10), rand(1..10), rand(1..25), rand(1..10))
 puts ptest
 print "Test dealing damage :: "
 ptest.fight()
 print "Test taking damage :: "
-ptest.hit(10)
+ptest.hit(15)
 
 ptest.use_item(2)
 puts ptest
+=end

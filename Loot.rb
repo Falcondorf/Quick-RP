@@ -12,7 +12,7 @@ class Loot
   end
   
   def to_s
-    "You looted : #{self.gold} gold(s) and \n#{gear}"
+    "You looted : #{self.gold} gold(s) and [#{gear.rarity}]#{gear.name}"
   end
   
   private
@@ -25,7 +25,7 @@ class Loot
   
   def roll_rarity
       roll = rand(100)
-      if (self.level == 1)
+      if (self.level == "Forest")
         if (roll < 80)
           "Basic"
         elsif (roll < 95)
@@ -33,7 +33,7 @@ class Loot
         else
           "Epic"
         end
-      elsif (self.level == 2)
+      elsif (self.level == "Cave")
         if (roll < 65)
           "Basic"
         elsif (roll < 85)
@@ -41,7 +41,7 @@ class Loot
         else
           "Epic"
         end
-      elsif (self.level == 3)
+      elsif (self.level == "Dungeon")
         if (roll < 50)
           "Basic"
         elsif (roll < 90)
@@ -49,7 +49,7 @@ class Loot
         else
           "Epic"
         end
-      elsif (self.level == 4)
+      elsif (self.level == "City")
         if (roll < 35)
           "Basic"
         elsif (roll < 60)
@@ -63,7 +63,7 @@ class Loot
 end
 
 =begin
-tloot = Loot.new(2,true)
+tloot = Loot.new("Cave",true)
 
 puts tloot
 =end
