@@ -1,5 +1,5 @@
 class Item
-  attr_accessor :name, :rarity, :type
+  attr_accessor :name, :rarity, :type, :value
   
   def initialize(name, rarity, type)
     if(type != "potion" && type != "elixir" && type != "bag-slot" && type != "poison") #Verify strings are correct
@@ -8,6 +8,16 @@ class Item
     self.name = name
     self.rarity = rarity
     self.type = type
+    case (rarity)
+    when "Basic"
+      self.value = 3
+    when "Rare"
+      self.value = 8
+    when "Epic"
+      self.value = 15
+    else
+      raise "Wrong rarity."
+    end
   end
   
   def to_s

@@ -44,6 +44,7 @@ class Adventure
   end
   
 end
+
 =begin
 tadv = Adventure.new()
 

@@ -20,7 +20,7 @@ class Entity
        puts "Dodged"
        damage = 0
      end
-     puts "You took #{damage} damage(s)."
+     puts "#{damage} damage(s) taken."
      self.hp -= damage 
      return
    end

@@ -31,6 +31,23 @@ def to_s
     return disp
   end
   
+  def sell (type, id)
+    case (type)
+    when "Gear"
+      sold_gear = self.gears.at(id).dup
+      return sold_gear
+    when "Item"
+      sold_item = self.items.at(id).dup
+      return sold_item
+    else
+      raise "Wrong type of item."
+    end
+  end
+  
+  def buy (value)
+    return (value*0.666).round #2/3 of the initial price
+  end
+  
   private
   
   def roll_items()
@@ -124,5 +141,5 @@ end
 =begin
 shtest = Shop.new("Forest")
 
-puts shtest
+puts shtest.buy(40)
 =end

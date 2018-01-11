@@ -10,6 +10,14 @@ class Encounter
     self.nodamage = true
   end
   
+  def attack_mob(damage)
+    self.mob.hit(damage)
+  end
+  
+  def mob_attacking()
+    return self.mob.fight()
+  end
+  
   def to_s
     "You are in #{self.location} against a #{self.mob.name}"
   end
