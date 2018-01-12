@@ -99,6 +99,40 @@ class Champion < Entity
       when "poison"   #deal damage to a mob(rarity determines how many damages) //may be like a grenade
         #TODO
       end
+      
+      self.bag.delete_at(id)
+      
+    end
+    
+    def equip_gear (id)
+      
+      place = self.bag.at(id).place
+      self.bag[id] , gears[place] =  gears[place] , self.bag[id]
+    end
+    
+    def add_to_bag(item)
+      if (self.bag.size() == self.max_bag_place)
+        puts "Your bag cannot carry anymore..."
+      else
+        puts "Adding #{item.name} to your bag."
+        self.bag.push(item)
+      end
+    end
+    
+    def show_bag_content
+      content = "You have in your bag:\n"
+      self.bag.each do |it|
+        content += "-#{it.name}\n"
+      end
+      puts content
+    end
+    
+    def show_gear_equipped
+      equipement = "You are wearing: \n"
+      gears.each do |k, g|
+        equipement += "#{k} => #{g}\n--\n"
+      end
+      puts equipement
     end
     
     def to_s
@@ -178,15 +212,28 @@ private
           return bonus
         end
 end
-=begin 
 
+=begin
 ptest = Champion.new(rand(1..100), rand(1..10), rand(1..10), rand(1..25), rand(1..10))
 puts ptest
+ptest.show_gear_equipped()
 print "Test dealing damage :: "
 ptest.fight()
 print "Test taking damage :: "
 ptest.hit(15)
 
+ptest.add_to_bag(Item.new("Test","Basic","potion"))
+ptest.add_to_bag(Item.new("Test","Basic","potion"))
+ptest.show_bag_content()
+ptest.add_to_bag(Item.new("Test","Basic","potion"))
+
 ptest.use_item(2)
+ptest.show_bag_content()
+ptest.add_to_bag(Gear.new("Rare", rand(1..100)))
+puts ptest
+
+ptest.equip_gear(4)
+ptest.show_gear_equipped()
+ptest.show_bag_content()
 puts ptest
 =end

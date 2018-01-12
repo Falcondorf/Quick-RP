@@ -3,10 +3,12 @@ require "Encounter.rb"
 require "Shop.rb"
 
 class Adventure
-  attr_accessor :champion, :journey
+  attr_accessor :champion, :journey, :gameover, :position
   
   def initialize()
-    self.journey = Array.new(30)
+    self.position = 0
+    self.gameover = false
+    self.journey = Array.new()
     self.champion = Champion.new(rand(1..100), rand(1..10), rand(1..10), rand(1..25), rand(1..10))
           
     for i in (1..20)
@@ -34,8 +36,10 @@ class Adventure
     end
   end
   
+  
+  
   def to_s
-    disp = "This adventure will go through"
+    disp = "This adventure will go through\n"
     for i in (0...20)
       disp += "#{i+1}:#{self.journey.at(i)}\n"
     end
@@ -44,9 +48,3 @@ class Adventure
   end
   
 end
-
-=begin
-tadv = Adventure.new()
-
-puts tadv
-=end
