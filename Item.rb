@@ -21,7 +21,7 @@ class Item
   end
   
   def to_s
-    "[#{self.rarity}]#{self.name}"
+    "[#{self.rarity}]#{self.name} -- worth #{self.value()} golds."
   end
     
 end

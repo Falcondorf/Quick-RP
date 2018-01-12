@@ -119,6 +119,11 @@ class Champion < Entity
       end
     end
     
+    def throw_away(id)
+      puts "You threw away #{self.bag[id].name}"
+      self.bad[id].delete_at(id)
+    end
+    
     def show_bag_content
       content = "You have in your bag:\n"
       self.bag.each do |it|
@@ -195,7 +200,7 @@ private
       
   def calc_bonus(stat)
           bonus = 0
-          self.gears.each do |place, gear| 
+          self.gears.each do |place, gear|
             case (stat)
             when "hp"
               bonus += gear.hp
@@ -236,4 +241,7 @@ ptest.equip_gear(4)
 ptest.show_gear_equipped()
 ptest.show_bag_content()
 puts ptest
+
+ptest.throw_away(0)
+ptest.show_bag_content()
 =end

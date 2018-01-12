@@ -21,11 +21,11 @@ class Shop
 def to_s
     disp = "Selling followings items:\nItem:\n"
     for i in (0..items.length-1)
-      disp += "*#{items[i]}\n"
+      disp += "*#{i+1})#{items[i]}\n"
     end
     disp += "---------------\nGears:\n"
-    for i in (0..gears.length-1)
-      disp += "*#{gears[i]}\n"
+    for j in (0..gears.length-1)
+      disp += "*#{j+1})#{gears[j]}\n"
     end
     
     return disp
@@ -35,9 +35,11 @@ def to_s
     case (type)
     when "Gear"
       sold_gear = self.gears.at(id).dup
+      self.gears.delete_at(id)
       return sold_gear
     when "Item"
       sold_item = self.items.at(id).dup
+      self.items.delete_at(id)
       return sold_item
     else
       raise "Wrong type of item."

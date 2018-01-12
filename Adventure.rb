@@ -34,9 +34,7 @@ class Adventure
         end
       end
     end
-  end
-  
-  
+    end
   
   def to_s
     disp = "This adventure will go through\n"
