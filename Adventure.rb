@@ -35,6 +35,10 @@ class Adventure
       end
     end
     end
+    
+    def place ()
+      return self.journey().at(position)
+    end
   
   def to_s
     disp = "This adventure will go through\n"

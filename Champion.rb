@@ -121,13 +121,13 @@ class Champion < Entity
     
     def throw_away(id)
       puts "You threw away #{self.bag[id].name}"
-      self.bad[id].delete_at(id)
+      self.bag.delete_at(id)
     end
     
     def show_bag_content
       content = "You have in your bag:\n"
-      self.bag.each do |it|
-        content += "-#{it.name}\n"
+      for i in (0...bag.length)
+        content += "#{i+1}) #{bag.at(i)}\n"
       end
       puts content
     end

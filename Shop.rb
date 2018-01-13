@@ -18,15 +18,27 @@ class Shop
     end
   end
   
-def to_s
-    disp = "Selling followings items:\nItem:\n"
+  def show_items
+    disp = "Items:\n"
     for i in (0..items.length-1)
       disp += "*#{i+1})#{items[i]}\n"
     end
-    disp += "---------------\nGears:\n"
+    return disp
+  end
+  
+  def show_gears
+    disp = "Gears:\n"
     for j in (0..gears.length-1)
       disp += "*#{j+1})#{gears[j]}\n"
     end
+    return disp
+  end
+  
+def to_s
+    disp = "Selling followings items:\n"
+    disp += show_items
+    disp += "---------------\n"
+    disp += show_gears
     
     return disp
   end
@@ -142,6 +154,8 @@ end
 
 =begin
 shtest = Shop.new("Forest")
+
+puts shtest.show_items
 
 puts shtest.buy(40)
 =end

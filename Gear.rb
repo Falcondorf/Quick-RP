@@ -78,7 +78,7 @@ class Gear
   end
 
   def to_s
-    "[#{self.rarity}]#{self.name}\n-------------------\nHP:#{self.hp}\nStr:#{self.str}\nInt:#{self.int}\nLck:#{self.lck}\nDxt:#{self.dxt}\n-------------------\nWorth #{self.value} gold(s)"  end
+    "[#{self.rarity}]#{self.name} => (#{self.place})\n-------------------\nHP:#{self.hp}\nStr:#{self.str}\nInt:#{self.int}\nLck:#{self.lck}\nDxt:#{self.dxt}\n-------------------\nWorth #{self.value} gold(s)"  end
     private
     
     def constr1(emplacement)
