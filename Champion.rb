@@ -98,6 +98,7 @@ class Champion < Entity
         puts "You can now carry #{rar_mult} more slots."
       when "poison"   #deal damage to a mob(rarity determines how many damages) //may be like a grenade
         #TODO
+        puts "Not yet implemented (Sorry for that)"
       end
       
       self.bag.delete_at(id)
@@ -126,7 +127,7 @@ class Champion < Entity
     
     def show_bag_content
       content = "You have in your bag:\n"
-      for i in (0...bag.length)
+      for i in (0...max_bag_place)
         content += "#{i+1}) #{bag.at(i)}\n"
       end
       puts content
