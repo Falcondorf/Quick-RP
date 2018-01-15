@@ -50,7 +50,7 @@ goto head
 :lancer
 cls
 if not exist C:\QuickRP-Game\Main.rb goto lancerErr
-ruby Main.rb
+ruby C:\quickRP-Game\Main.rb
 cls
 goto head
 
