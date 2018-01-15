@@ -1,6 +1,5 @@
 class Entity
-  attr_accessor :hp, :str, :int, :lck, :dxt
-  attr_reader :is_dead
+  attr_accessor :hp, :str, :int, :lck, :dxt, :name, :is_dead
   @crit = false
   
   def fight
@@ -20,16 +19,11 @@ class Entity
        puts "Dodged"
        damage = 0
      end
-     puts "#{damage} damage(s) taken."
-     self.hp -= damage 
+     puts "#{damage} damage(s) taken by #{self.name}"
+     self.hp -= damage
+     check_dead()
      return
-   end
-   
-   def die ()
-     if (hp <=0 )
-       isdead = true
-     end
-   end
+   end   
    
    private 
    def calc_crit(lck)
@@ -41,5 +35,11 @@ class Entity
      roll = rand(1..100)
      return (roll < dxt)
    end
-  
+   
+   def check_dead ()
+    if (hp <= 0 )
+     self.is_dead = true
+     puts "#{self.name} died during the battle..."     
+    end
+   end
 end

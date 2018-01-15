@@ -66,11 +66,10 @@ $list_Bosses_attr = [
   ["Placeholder",0,0,0,0,0]
 ]
 
-class Mob < Entity    
-  attr_accessor :name
+class Mob < Entity
   
     def initialize (location)
-      is_dead = false
+      self.is_dead = false
       rand_spawn = rand(10)
       case (location)
       when "Forest"

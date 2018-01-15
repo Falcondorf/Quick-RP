@@ -7,7 +7,8 @@ class Champion < Entity
     
     
     def initialize (hp,str,int,lck,dxt)
-      is_dead = false
+      self.is_dead = false
+      name = "The hero"
       
       if (hp < 45)
         hp += 35
@@ -73,7 +74,8 @@ class Champion < Entity
           damage = 0
         end
         puts "You took #{damage} damage(s)."
-        self.hp -= damage 
+        self.hp -= damage
+        check_dead()
       end
       
   def use_item (id)
@@ -139,6 +141,10 @@ class Champion < Entity
         equipement += "#{k} => #{g}\n--\n"
       end
       puts equipement
+    end
+    
+    def show_hp_status
+      return "\nYou have #{self.hp}/#{self.max_hp}(+#{calc_bonus("hp")})."
     end
     
     def to_s

@@ -113,32 +113,41 @@ while (!adv.gameover && !adv.champion.is_dead) #Loop control end game
           when 2
             adv.champion.show_gear_equipped()
           when 3
-            begin
-              puts "\nType the id of the item in your bag, if it's an item it will use it on you else it will equip the item and put the one you wore in the bag."
-              bag_id = gets.to_i()
-              if (bag_id <= 0 || bag_id > adv.champion.bag.length)
-                raise "Wrong ID of empty slot."
+            if (adv.champion.bag.length == 0)
+              puts "\nYou bag is empty."
+            else
+              begin
+                adv.champion.show_bag_content()
+                puts "\nType the id of the item in your bag, if it's an item it will use it on you else it will equip the item and put the one you wore in the bag."
+                bag_id = gets.to_i()
+                if (bag_id <= 0 || bag_id > adv.champion.bag.length)
+                  raise "Wrong ID of empty slot."
+                end
+                if (adv.champion.bag.at(bag_id-1).instance_of? Item)
+                  adv.champion.use_item(bag_id-1)
+                else
+                  adv.champion.equip_gear(bag_id-1)
+                end
+              rescue => exception
+                puts exception
+                retry
               end
-              if (adv.champion.bag.at(bag_id-1).instance_of? Item)
-                adv.champion.use_item(bag_id-1)
-              else
-                adv.champion.equip_gear(bag_id-1)
-              end
-            rescue => exception
-              puts exception
-              retry
             end
           when 4
-            begin
-              puts "\nType the id of the item in your bag you want to throw away."
-              bag_id = gets.to_i()
-              if (bag_id <= 0 || bag_id > adv.champion.bag.length)
-                raise "Wrong ID of empty slot."
+            if (adv.champion.bag.length == 0)
+              puts "\nYour bag is empty."
+            else
+              begin
+                puts "\nType the id of the item in your bag you want to throw away."
+                bag_id = gets.to_i()
+                if (bag_id <= 0 || bag_id > adv.champion.bag.length)
+                  raise "Wrong ID of empty slot."
+                end
+                adv.champion.throw_away(bag_id-1)
+              rescue =>exception
+                puts exception
+                retry
               end
-              adv.champion.throw_away(bag_id-1)
-            rescue =>exception
-              puts exception
-              retry
             end
           when 5
             in_inventory = false
@@ -155,11 +164,68 @@ while (!adv.gameover && !adv.champion.is_dead) #Loop control end game
       end
     end
   else
-    puts "Encounter in #{adv.place()}"
+    puts "\nYou encountered a #{adv.place().mob.name}... Prepare to fight"   
+    while (!adv.champion.is_dead() && !adv.place().mob.is_dead())
+      begin
+        player_turn = true
+        while(player_turn)
+          puts adv.champion.show_hp_status()
+          puts "\nWhat will you do?\n1)Attack\n2)Use an item or change gear\n3)Show Inventory\n4)Show gear equipped\n5)Show your stats"
+          enc_decision = gets.to_i()
+          if (enc_decision < 0 || enc_decision > 5)
+            raise "Invalid option."
+          end
+           case (enc_decision)
+           when 1
+             adv.place().attack_mob(adv.champion.fight())
+             player_turn = false
+           when 2
+             if (adv.champion().bag.length == 0)
+              puts "\nYour bag is empty."
+             else
+                 puts "\nType id of the item to use or the gear to swap."
+                 adv.champion.show_bag_content()
+                 it_id = -1
+                 while (it_id > adv.champion.bag.length || it_id < 0)
+                   it_id = gets.to_i()
+                 end             
+                 if (adv.champion.bag.at(it_id-1).instance_of? Item)
+                   adv.champion.use_item(it_id-1)
+                 else
+                   adv.champion.equip_gear(it_id-1)
+                 end
+             end
+             when 3
+               adv.champion.show_bag_content()
+             when 4
+               adv.champion.show_gear_equipped()
+             when 5
+               puts adv.champion
+             else
+               puts "\nInvalid option."
+             end
+        end
+      rescue => exception
+        puts exception
+        retry
+      end
+      if (!adv.place().mob.is_dead())       
+        puts "\n#{adv.place().mob.name} is attacking you...\n"
+        adv.champion.hit(adv.place().mob_attacking())        
+        player_turn = true
+      else 
+        #TODO Take the new loot
+      end
+    end       
     adv.position += 1
     if (adv.position == 20) # After the Final boss, position is superior to the journey length and end the game
       adv.gameover = true
-      puts "Game finished"
     end
   end
+end
+
+if (adv.champion.is_dead)
+  puts "You died on your epic journey, but you'll have better luck next time."
+else
+  puts "You succeeded in your quest and are now a respected and powerfull Hero."
 end
