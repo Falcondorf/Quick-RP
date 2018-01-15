@@ -41,29 +41,29 @@ $list_dungeon_mobs_attr = [
 ]
 
 $list_city_mobs_attr = [
-  ["Thief"],
-  ["Harlequin"],
-  ["Corrupted Guard"],
-  ["Stray Dog"],
-  ["Giant Sewer Rat"],
-  ["Drunken"],
-  ["Assassin"],
-  ["Giant Slug"],
-  ["Crazy Chemist"],
-  ["Failed Experiment"]
+  ["Thief",40,22,15,40,50],
+  ["Harlequin",55,32,5,10,10],
+  ["Corrupted Guard",85,45,4,20,10],
+  ["Stray Dog",35,30,2,15,60],
+  ["Giant Sewer Rat",72,40,5,10,5],
+  ["Drunken",10,3,0,65,70],
+  ["Assassin",50,44,40,75,55],
+  ["Giant Slug",130,12,2,0,0],
+  ["Crazy Chemist",48,20,85,42,12],
+  ["Failed Experiment",110,37,0,0,0]
 ]
 
 $list_Bosses_attr = [
-  ["Placeholder",0,0,0,0,0],
-  ["Placeholder",0,0,0,0,0],
-  ["Placeholder",0,0,0,0,0],
-  ["Placeholder",0,0,0,0,0],
-  ["Placeholder",0,0,0,0,0],
-  ["Placeholder",0,0,0,0,0],
-  ["Placeholder",0,0,0,0,0],
-  ["Placeholder",0,0,0,0,0],
-  ["Placeholder",0,0,0,0,0],
-  ["Placeholder",0,0,0,0,0]
+  ["Takuma The Crazy Samourai",180,35,15,20,35],
+  ["Thousand Heads Hydra",140,24,5,10,40],
+  ["Fairy Empress",95,27,100,85,24],
+  ["Your Ex",100,28,0,40,10],
+  ["Bernard The Explorer",150,30,50,35,60],
+  ["Don Tonto Del Grifo",150,41,5,5,25],
+  ["Henry The Inquisitor",120,25,37,35,30],
+  ["Tri-Golem",250,15,0,0,0],
+  ["Razuum The Eldest Drake",300,20,67,15,40],
+  ["Ghuz'loran Moon Creature",160,39,50,20,55]
 ]
 
 class Mob < Entity

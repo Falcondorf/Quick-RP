@@ -222,9 +222,8 @@ while (!adv.gameover && !adv.champion.is_dead) #Loop control end game
           adv.champion.money += adv.place().loot.gold
           adv.champion.add_to_bag(adv.place().loot.gear.dup())
         end
-        #Heal the champion of 25% HP
         puts "\nYou took a quick rest."
-        adv.champion.heal(35)
+        adv.champion.heal(15)
       end
     end
     adv.position += 1

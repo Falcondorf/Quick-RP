@@ -5,7 +5,7 @@ class Loot
   
   def initialize(level)
     self.level = level
-    self.gold = rand(5..20)
+    self.gold = rand(3..10)
     rarity = roll_rarity
     self.gear = Gear.new(rarity,rand(1..100))
   end
