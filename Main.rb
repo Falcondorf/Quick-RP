@@ -1,4 +1,4 @@
-require "Adventure.rb"
+require_relative "./Adventure.rb"
 
 adv = Adventure.new()
 
@@ -214,9 +214,19 @@ while (!adv.gameover && !adv.champion.is_dead) #Loop control end game
         adv.champion.hit(adv.place().mob_attacking())        
         player_turn = true
       else 
-        #TODO Take the new loot
+        if (adv.champion.bag.length == adv.champion.max_bag_place)
+          puts "Your bag is full, You cannot loot the new stuff...\nYou earned #{adv.place().loot.gold} golds."
+          adv.champion.money += adv.place().loot.gold
+        else
+          puts adv.place().loot
+          adv.champion.money += adv.place().loot.gold
+          adv.champion.add_to_bag(adv.place().loot.gear.dup())
+        end
+        #Heal the champion of 25% HP
+        puts "\nYou took a quick rest."
+        adv.champion.heal(35)
       end
-    end       
+    end
     adv.position += 1
     if (adv.position == 20) # After the Final boss, position is superior to the journey length and end the game
       adv.gameover = true

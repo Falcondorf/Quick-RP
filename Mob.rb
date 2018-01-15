@@ -1,4 +1,4 @@
-require "Entity.rb"
+require_relative "./Entity.rb"
 
 #Key is name of the mob and values an array describing base hp, str and lck
 $list_forest_mobs_attr = [
@@ -15,29 +15,29 @@ $list_forest_mobs_attr = [
 ]
 
 $list_cave_mobs_attr = [
-  ["Bat",20,8,0,20,15],
-  ["Sly Goblin",28,13,7,13,7],
-  ["Spider",18,10,0,10,5],
-  ["Stone Elemental",60,28,0,1,1],
+  ["Bat",30,8,0,20,15],
+  ["Sly Goblin",38,13,7,13,7],
+  ["Spider",28,10,0,10,5],
+  ["Stone Elemental",70,28,0,1,1],
   ["Slime",80,1,0,25,0],
-  ["Miner",36,17,5,20,13],
-  ["Cave Bear",30,22,0,0,5],
-  ["Drooling Troll",40,27,0,0,1],
-  ["Shrooman",30,15,5,10,14],
-  ["Wicked Fairy",17,9,30,100,35]
+  ["Miner",46,17,5,20,13],
+  ["Cave Bear",40,22,0,0,5],
+  ["Drooling Troll",50,27,0,0,1],
+  ["Shrooman",45,15,5,10,14],
+  ["Wicked Fairy",27,9,30,100,35]
 ]
 
 $list_dungeon_mobs_attr = [
-  ["Dusty Skeleton",20,13,0,40,3],
-  ["Elegant Vampire",38,18,58,20,18],
-  ["Golem",75,35,0,1,1],
-  ["Stinky Undead",22,17,0,5,3],
-  ["Living Armor",30,30,30,5,0],
-  ["Sad Ghost",1,1,70,0,99],
-  ["Fake-Chest",20,25,0,15,5],
-  ["Automaton",18,17,30,35,5],
-  ["Gargoyle",30,30,30,5,2],
-  ["Bewitching Gorgon",20,12,38,10,10]
+  ["Dusty Skeleton",40,13,0,40,3],
+  ["Elegant Vampire",58,18,58,20,18],
+  ["Golem",95,35,0,1,1],
+  ["Stinky Undead",42,17,0,5,3],
+  ["Living Armor",50,30,30,5,0],
+  ["Sad Ghost",1,1,70,0,85],
+  ["Fake-Chest",40,25,0,15,5],
+  ["Automaton",38,17,30,35,5],
+  ["Gargoyle",50,30,30,5,2],
+  ["Bewitching Gorgon",40,12,38,10,10]
 ]
 
 $list_city_mobs_attr = [
@@ -109,8 +109,8 @@ class Mob < Entity
         self.dxt=($list_Bosses_attr[rand_spawn][5])
       when "Final Boss"
         self.name="Hastzora"
-        self.hp=12000
-        self.str=80
+        self.hp=1200
+        self.str=40
         self.int=50
         self.lck=40
         self.dxt=45

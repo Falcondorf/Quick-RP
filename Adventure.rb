@@ -1,6 +1,6 @@
-require "Champion.rb"
-require "Encounter.rb"
-require "Shop.rb"
+require_relative "./Champion.rb"
+require_relative "./Encounter.rb"
+require_relative "./Shop.rb"
 
 class Adventure
   attr_accessor :champion, :journey, :gameover, :position
@@ -9,7 +9,7 @@ class Adventure
     self.position = 0
     self.gameover = false
     self.journey = Array.new()
-    self.champion = Champion.new(rand(1..100), rand(1..10), rand(1..10), rand(1..25), rand(1..10))
+    self.champion = Champion.new(100, rand(6..12), rand(1..15), rand(1..25), rand(5..10))
           
     for i in (1..20)
       if(i == 20)          

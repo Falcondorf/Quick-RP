@@ -1,13 +1,13 @@
-require "Mob.rb"
-require "Loot.rb"
+require_relative "./Mob.rb"
+require_relative "./Loot.rb"
 
 class Encounter
-  attr_accessor :location, :mob, :loot, :nodamage #Nodamage boolean check to add loot bonus
+  attr_accessor :location, :mob, :loot
   
   def initialize (location)
     self.location = location
     self.mob= Mob.new(location)
-    self.nodamage = true
+    self.loot = Loot.new(location)
   end
   
   def attack_mob(damage)

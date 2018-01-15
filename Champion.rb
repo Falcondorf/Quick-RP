@@ -1,6 +1,6 @@
-require "Entity.rb"
-require "Gear.rb"
-require "Item.rb"
+require_relative "./Entity.rb"
+require_relative "./Gear.rb"
+require_relative "./Item.rb"
 
 class Champion < Entity
     attr_accessor :max_hp, :max_bag_place, :gears, :bag, :money
@@ -9,11 +9,7 @@ class Champion < Entity
     def initialize (hp,str,int,lck,dxt)
       self.is_dead = false
       name = "The hero"
-      
-      if (hp < 45)
-        hp += 35
-      end
-      
+=begin
       if(str+int+lck+dxt < 20)
         str += 5
         int += 5
@@ -25,9 +21,9 @@ class Champion < Entity
         lck -= 2
         dxt -= 3
       end
-      
+    
       str, int, lck, dxt = check_stats(str, int, lck, dxt)
-      
+=end      
         self.max_hp = 100
         self.max_bag_place = 5
 
@@ -86,13 +82,7 @@ class Champion < Entity
     puts "You are using #{self.bag[id]}"
       case(item_type)
       when "potion"   #restore health (rarity determine how many health given back)
-        if (self.hp == self.max_hp+calc_bonus("hp"))
-          puts "Your hp are already full..."
-        else
-          self.hp += 10 * rar_mult
-          puts "You healed #{10*rar_mult} hp."
-          check_hp_overextend()
-        end        
+        heal(10*rar_mult)
       when "elixir"   #increase stats definitly(rarity determines how many stats) 
         increase_stat(self.bag[id].name().slice(0..2), rar_mult)
       when "bag-slot" #increase place in bag(rarity determines amount of slots)
@@ -107,10 +97,20 @@ class Champion < Entity
       
     end
     
-    def equip_gear (id)
-      
+    def heal (amount)
+      if (self.hp == self.max_hp+calc_bonus("hp"))
+        puts "Your hp are already full..."
+      else
+        self.hp += amount
+        puts "You healed #{amount} hp."
+        check_hp_overextend()
+      end      
+    end
+    
+    def equip_gear (id)      
       place = self.bag.at(id).place
       self.bag[id] , gears[place] =  gears[place] , self.bag[id]
+      check_hp_overextend()
     end
     
     def add_to_bag(item)

@@ -1,12 +1,11 @@
-require "Gear.rb"
+require_relative "./Gear.rb"
 
 class Loot
   attr_accessor :gold, :gear, :level
   
-  def initialize(level,nodamage)
+  def initialize(level)
     self.level = level
-    self.gold = rand(1..7)
-    reward_bonus(nodamage)
+    self.gold = rand(5..20)
     rarity = roll_rarity
     self.gear = Gear.new(rarity,rand(1..100))
   end
@@ -16,12 +15,6 @@ class Loot
   end
   
   private
-  
-  def reward_bonus(nodamage)
-    if (nodamage)
-      self.gold *= 2
-    end
-  end
   
   def roll_rarity
       roll = rand(100)
@@ -57,6 +50,8 @@ class Loot
         else
           "Epic"
         end
+      elsif(self.level == "Boss" || self.level == "Final Boss")
+          "Epic"
       end
     end
   

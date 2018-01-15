@@ -1,5 +1,5 @@
-require "Item.rb"
-require "Gear.rb"
+require_relative "./Item.rb"
+require_relative "./Gear.rb"
 
 class Shop
   #TODO a shopkeeper that will sell goods for the champion or buy his stuff
