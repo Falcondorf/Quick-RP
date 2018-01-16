@@ -56,14 +56,14 @@ $list_city_mobs_attr = [
 $list_Bosses_attr = [
   ["Takuma The Crazy Samourai",180,35,15,20,35],
   ["Thousand Heads Hydra",140,24,5,10,30],
-  ["Fairy Empress",95,27,100,85,24],
+  ["Fairy Empress",95,14,100,85,24],
   ["Your Ex",100,28,0,40,10],
-  ["Bernard The Explorer",150,20,50,30,60],
-  ["Don Tonto Del Grifo",150,41,5,5,25],
+  ["Bernard The Explorer",150,20,50,30,40],
+  ["Don Tonto Del Grifo",150,34,5,5,25],
   ["Henry The Inquisitor",120,25,37,35,30],
   ["Tri-Golem",250,15,0,0,0],
-  ["Razuum The Eldest Drake",300,20,67,15,40],
-  ["Ghuz'loran Moon Creature",160,39,50,20,55]
+  ["Razuum The Eldest Drake",300,18,67,15,40],
+  ["Ghuz'loran Moon Creature",160,31,50,20,55]
 ]
 
 class Mob < Entity

@@ -9,7 +9,7 @@ class Adventure
     self.position = 0
     self.gameover = false
     self.journey = Array.new()
-    self.champion = Champion.new(100, rand(6..12), rand(1..15), rand(1..25), rand(5..10))
+    self.champion = Champion.new(100, rand(8..15), rand(1..15), rand(1..25), rand(5..20))
           
     for i in (1..20)
       if(i == 20)          
