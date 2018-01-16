@@ -32,8 +32,12 @@ class Entity
    end
    
    def calc_escape(dxt)
+     calc_dxt = dxt
+     if(dxt > 90)
+       calc_dxt = 90
+     end
      roll = rand(1..100)
-     return (roll < dxt)
+     return (roll < calc_dxt)
    end
    
    def check_dead ()

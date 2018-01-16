@@ -25,7 +25,7 @@ while (!adv.gameover && !adv.champion.is_dead) #Loop control end game
             when 0 #Exit buying
               buying = false
             when 1 #Manage Items buying
-              if (adv.champion.bag.length >= adv.champion.max_bag_place)
+              if (adv.champion.bag.length < adv.champion.max_bag_place)
                 puts adv.place().show_items
                 begin
                   puts "\nWhat's the id of the item?"
@@ -148,6 +148,7 @@ while (!adv.gameover && !adv.champion.is_dead) #Loop control end game
               puts "\nYour bag is empty."
             else
               begin
+                adv.champion.show_bag_content()
                 puts "\nType the id of the item in your bag you want to throw away.(0 to cancel)"
                 bag_id = gets.to_i()
                 if (bag_id != 0)
@@ -176,7 +177,14 @@ while (!adv.gameover && !adv.champion.is_dead) #Loop control end game
       end
     end
   else
-    puts "\nYou encountered a #{adv.place().mob.name}... Prepare to fight"   
+    if (adv.place().location == "Boss" || adv.place().location == "Final Boss")
+      puts "You felt the danger ahead and prepared for the battle. You took a good rest..."
+      adv.champion.heal(100)
+    else
+      puts "You took a quick rest."
+      adv.champion.heal(25)
+    end    
+      puts "\nYou encountered a #{adv.place().mob.name}... Prepare to fight"   
     while (!adv.champion.is_dead() && !adv.place().mob.is_dead())
       begin
         player_turn = true
@@ -237,19 +245,8 @@ while (!adv.gameover && !adv.champion.is_dead) #Loop control end game
           adv.champion.add_to_bag(adv.place().loot.gear.dup())
         end
       end
-    end
-    if(!adv.champion.is_dead)
-      adv.position += 1
-      if (adv.place().instance_of? Encounter)
-        if (adv.place().location == "Boss" || adv.place().location == "Final Boss")
-          puts "You felt the danger ahead and prepared for the battle. You took a good rest..."
-          adv.champion.heal(100)
-        else
-          puts "You took a quick rest."
-          adv.champion.heal(25)
-        end
-      end
-    end
+    end    
+    adv.position += 1      
     if (adv.position == 20) # After the Final boss, position is superior to the journey length and end the game
       adv.gameover = true
     end
