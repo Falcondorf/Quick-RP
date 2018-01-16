@@ -51,6 +51,7 @@ goto head
 cls
 if not exist C:\QuickRP-Game\Main.rb goto lancerErr
 ruby C:\quickRP-Game\Main.rb
+pause
 cls
 goto head
 

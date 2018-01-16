@@ -55,7 +55,7 @@ $list_city_mobs_attr = [
 
 $list_Bosses_attr = [
   ["Takuma The Crazy Samourai",180,35,15,20,35],
-  ["Thousand Heads Hydra",140,24,5,10,40],
+  ["Thousand Heads Hydra",140,24,5,10,30],
   ["Fairy Empress",95,27,100,85,24],
   ["Your Ex",100,28,0,40,10],
   ["Bernard The Explorer",150,30,50,35,60],

@@ -7,7 +7,7 @@ while (!adv.gameover && !adv.champion.is_dead) #Loop control end game
     in_shop = true
     puts "\nYou arrived in a shop, many goods are in sale and you can sell your stuff here for golds."
     while (in_shop) #Loop control in shop
-      puts "\nChoose an option: \n1)Display goods\n2)Buy\n3)Sell\n4)Inventory\n5)Exit shop"
+      puts "\nChoose an option: \n1)Display goods\n2)Buy\n3)Sell\n4)Inventory\n5)Exit shop\n----------\nYou have #{adv.champion.money} gold(s)."
       opt = gets.to_i()
       case (opt)
       when 1 #Displaying Shop
@@ -25,49 +25,57 @@ while (!adv.gameover && !adv.champion.is_dead) #Loop control end game
             when 0 #Exit buying
               buying = false
             when 1 #Manage Items buying
-              puts adv.place().show_items
-              begin
-                puts "\nWhat's the id of the item?"
-                id_it = gets.to_i() - 1
-                if (id_it > adv.place().items.length-1 || id_it < 0) #Check user input available and correct
-                  raise "Wrong ID."
-                elsif (adv.place().items.length == 0)
-                  puts "\nAll items sold."
-                else
-                  if (adv.champion.money >= adv.place().items.at(id_it).value)
-                     item = adv.place().sell("Item", id_it)
-                     adv.champion.add_to_bag(item)
-                     adv.champion.money -= item.value
-                  else
-                    puts "\nYou don't have enough money"
-                  end                
-                end
-              rescue => exception
-                puts exception
-                retry
-              end
-            when 2 #Manage Gears buying
-                puts adv.place().show_gears
+              if (adv.champion.bag.length >= adv.champion.max_bag_place)
+                puts adv.place().show_items
                 begin
-                  puts "\nWhat's the id of the gear?"
-                  id_gr = gets.to_i() - 1
-                  if (id_gr > adv.place().gears.length - 1 || id_gr < 0)
+                  puts "\nWhat's the id of the item?"
+                  id_it = gets.to_i() - 1
+                  if (id_it > adv.place().items.length-1 || id_it < 0) #Check user input available and correct
                     raise "Wrong ID."
-                  elsif (adv.place().gears.length == 0)
+                  elsif (adv.place().items.length == 0)
                     puts "\nAll items sold."
                   else
-                    if (adv.champion.money >= adv.place().gears.at(id_gr).value)
-                       item = adv.place().sell("Gear", id_gr)
+                    if (adv.champion.money >= adv.place().items.at(id_it).value)
+                       item = adv.place().sell("Item", id_it)
                        adv.champion.add_to_bag(item)
                        adv.champion.money -= item.value
                     else
                       puts "\nYou don't have enough money"
-                    end    
+                    end                
                   end
                 rescue => exception
                   puts exception
                   retry
                 end
+              else
+                puts "Your bag is already full."
+              end
+            when 2 #Manage Gears buying
+              if(adv.champion.bag.length >= adv.champion.max_bag_place)
+                  puts adv.place().show_gears
+                  begin
+                    puts "\nWhat's the id of the gear?"
+                    id_gr = gets.to_i() - 1
+                    if (id_gr > adv.place().gears.length - 1 || id_gr < 0)
+                      raise "Wrong ID."
+                    elsif (adv.place().gears.length == 0)
+                      puts "\nAll items sold."
+                    else
+                      if (adv.champion.money >= adv.place().gears.at(id_gr).value)
+                         item = adv.place().sell("Gear", id_gr)
+                         adv.champion.add_to_bag(item)
+                         adv.champion.money -= item.value
+                      else
+                        puts "\nYou don't have enough money"
+                      end    
+                    end
+                  rescue => exception
+                    puts exception
+                    retry
+                  end
+              else
+                puts "Your bag is already full."
+              end
             else
                 puts "Invalid option"
             end             
@@ -118,15 +126,17 @@ while (!adv.gameover && !adv.champion.is_dead) #Loop control end game
             else
               begin
                 adv.champion.show_bag_content()
-                puts "\nType the id of the item in your bag, if it's an item it will use it on you else it will equip the item and put the one you wore in the bag."
+                puts "\nType the id of the item in your bag, an item is used and a gear swapped.(0 to cancel)"
                 bag_id = gets.to_i()
-                if (bag_id <= 0 || bag_id > adv.champion.bag.length)
-                  raise "Wrong ID of empty slot."
-                end
-                if (adv.champion.bag.at(bag_id-1).instance_of? Item)
-                  adv.champion.use_item(bag_id-1)
-                else
-                  adv.champion.equip_gear(bag_id-1)
+                if(bag_id != 0)
+                  if (bag_id <= 0 || bag_id > adv.champion.bag.length)
+                    raise "Wrong ID of empty slot."
+                  end
+                  if (adv.champion.bag.at(bag_id-1).instance_of? Item)
+                    adv.champion.use_item(bag_id-1)
+                  else
+                    adv.champion.equip_gear(bag_id-1)
+                  end
                 end
               rescue => exception
                 puts exception
@@ -138,12 +148,14 @@ while (!adv.gameover && !adv.champion.is_dead) #Loop control end game
               puts "\nYour bag is empty."
             else
               begin
-                puts "\nType the id of the item in your bag you want to throw away."
+                puts "\nType the id of the item in your bag you want to throw away.(0 to cancel)"
                 bag_id = gets.to_i()
-                if (bag_id <= 0 || bag_id > adv.champion.bag.length)
-                  raise "Wrong ID of empty slot."
+                if (bag_id != 0)
+                  if (bag_id <= 0 || bag_id > adv.champion.bag.length)
+                    raise "Wrong ID of empty slot."
+                  end
+                  adv.champion.throw_away(bag_id-1)
                 end
-                adv.champion.throw_away(bag_id-1)
               rescue =>exception
                 puts exception
                 retry
@@ -183,16 +195,18 @@ while (!adv.gameover && !adv.champion.is_dead) #Loop control end game
              if (adv.champion().bag.length == 0)
               puts "\nYour bag is empty."
              else
-                 puts "\nType id of the item to use or the gear to swap."
+                 puts "\nType id of the item to use or the gear to swap.(0 to cancel)"
                  adv.champion.show_bag_content()
                  it_id = -1
                  while (it_id > adv.champion.bag.length || it_id < 0)
                    it_id = gets.to_i()
-                 end             
-                 if (adv.champion.bag.at(it_id-1).instance_of? Item)
-                   adv.champion.use_item(it_id-1)
-                 else
-                   adv.champion.equip_gear(it_id-1)
+                 end
+                 if (it_id != 0)
+                   if (adv.champion.bag.at(it_id-1).instance_of? Item)
+                     adv.champion.use_item(it_id-1)
+                   else
+                     adv.champion.equip_gear(it_id-1)
+                   end
                  end
              end
              when 3
@@ -222,11 +236,20 @@ while (!adv.gameover && !adv.champion.is_dead) #Loop control end game
           adv.champion.money += adv.place().loot.gold
           adv.champion.add_to_bag(adv.place().loot.gear.dup())
         end
-        puts "\nYou took a quick rest."
-        adv.champion.heal(15)
       end
     end
-    adv.position += 1
+    if(!adv.champion.is_dead)
+      adv.position += 1
+      if (adv.place().instance_of? Encounter)
+        if (adv.place().location == "Boss" || adv.place().location == "Final Boss")
+          puts "You felt the danger ahead and prepared for the battle. You took a good rest..."
+          adv.champion.heal(100)
+        else
+          puts "You took a quick rest."
+          adv.champion.heal(25)
+        end
+      end
+    end
     if (adv.position == 20) # After the Final boss, position is superior to the journey length and end the game
       adv.gameover = true
     end
