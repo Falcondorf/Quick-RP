@@ -256,5 +256,5 @@ end
 if (adv.champion.is_dead)
   puts "You died on your epic journey, but you'll have better luck next time."
 else
-  puts "You succeeded in your quest and are now a respected and powerfull Hero."
+  puts "You succeeded in your quest and are now a respected and powerful Hero."
 end

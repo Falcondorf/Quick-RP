@@ -58,7 +58,7 @@ $list_Bosses_attr = [
   ["Thousand Heads Hydra",140,24,5,10,30],
   ["Fairy Empress",95,27,100,85,24],
   ["Your Ex",100,28,0,40,10],
-  ["Bernard The Explorer",150,30,50,35,60],
+  ["Bernard The Explorer",150,20,50,30,60],
   ["Don Tonto Del Grifo",150,41,5,5,25],
   ["Henry The Inquisitor",120,25,37,35,30],
   ["Tri-Golem",250,15,0,0,0],
