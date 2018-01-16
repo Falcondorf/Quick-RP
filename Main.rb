@@ -51,7 +51,7 @@ while (!adv.gameover && !adv.champion.is_dead) #Loop control end game
                 puts "Your bag is already full."
               end
             when 2 #Manage Gears buying
-              if(adv.champion.bag.length >= adv.champion.max_bag_place)
+              if(adv.champion.bag.length < adv.champion.max_bag_place)
                   puts adv.place().show_gears
                   begin
                     puts "\nWhat's the id of the gear?"
