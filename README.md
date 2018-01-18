@@ -5,6 +5,8 @@ A mini RPG game in ruby
 As this game is in Ruby, you will need to install the Ruby interpreter.
 [Click here to download Ruby installer for Windows](https://github.com/oneclick/rubyinstaller2/releases/download/rubyinstaller-2.5.0-1/rubyinstaller-2.5.0-1-x86.exe)
 
+You no longer need the interpreter and all. A compiled version is available now.
+[Click here to download the exe](https://github.com/Falcondorf/Quick-RP/raw/master/Quick-RP.exe)
 ## Manual
 You are about to play a very simple RPG. Every adventure is unique as a lot of variables are set randomly.
 Everytime you move forward you will either find a shop where you can buy and sell stuff or just manage your inventory and you will fight dangerous enemies each with their unique stats.
