@@ -258,3 +258,7 @@ if (adv.champion.is_dead)
 else
   puts "You succeeded in your quest and are now a respected and powerful Hero."
 end
+
+puts "Press any key to close the Console..."
+
+gets.chomp()
