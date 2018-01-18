@@ -25,15 +25,15 @@ while (!adv.gameover && !adv.champion.is_dead) #Loop control end game
             when 0 #Exit buying
               buying = false
             when 1 #Manage Items buying
-              if (adv.champion.bag.length < adv.champion.max_bag_place)
+              if (adv.place().items.empty?)
+                puts "\nAll items sold."
+              elsif(adv.champion.bag.length < adv.champion.max_bag_place)
                 puts adv.place().show_items
                 begin
                   puts "\nWhat's the id of the item?"
                   id_it = gets.to_i() - 1
                   if (id_it > adv.place().items.length-1 || id_it < 0) #Check user input available and correct
                     raise "Wrong ID."
-                  elsif (adv.place().items.length == 0)
-                    puts "\nAll items sold."
                   else
                     if (adv.champion.money >= adv.place().items.at(id_it).value)
                        item = adv.place().sell("Item", id_it)
@@ -51,15 +51,15 @@ while (!adv.gameover && !adv.champion.is_dead) #Loop control end game
                 puts "Your bag is already full."
               end
             when 2 #Manage Gears buying
-              if(adv.champion.bag.length < adv.champion.max_bag_place)
+              if (adv.place().gears.empty?)
+                puts "\nAll items sold."
+              elsif(adv.champion.bag.length < adv.champion.max_bag_place)
                   puts adv.place().show_gears
                   begin
                     puts "\nWhat's the id of the gear?"
                     id_gr = gets.to_i() - 1
                     if (id_gr > adv.place().gears.length - 1 || id_gr < 0)
                       raise "Wrong ID."
-                    elsif (adv.place().gears.length == 0)
-                      puts "\nAll items sold."
                     else
                       if (adv.champion.money >= adv.place().gears.at(id_gr).value)
                          item = adv.place().sell("Gear", id_gr)
